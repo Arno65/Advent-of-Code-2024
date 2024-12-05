@@ -4,7 +4,7 @@ This repository contains some of my solutions for [Advent of Code](https://adven
 My main programming language is Haskell. I'll also do some work in Clojure and C++. \
 I'm programming in Clojure to gain experience. \
 My son is learning C++ and to help him I am brushing up on my C++ knowledge myself.
-That's why here and there is a C++ program. \
+That's why here and there is a C++ program.
 
 For collecting the stars I will first code the solution in the language that works best for me. 
 Most of the time that will be Haskell.
