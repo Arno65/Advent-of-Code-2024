@@ -234,7 +234,7 @@ int main() {
     // Read data and store in two seperate lists
     while (getline(file, lines)) { grid.push_back(lines); }
     
-    cout << "Advent of Code 2024 - day 1  (C++)" << endl;       
+    cout << "Advent of Code 2024 - day 6  (C++)" << endl;       
     cout << "Part one: Number of distinct positions:  " << partOne(grid) << endl;
 // Running the next line will take ~ 23 seconds
     cout << "Part two: Number of different positions: " << partTwo(grid) << endl;
