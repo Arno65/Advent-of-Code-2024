@@ -15,12 +15,6 @@ import Data.Char (isDigit)
 filename :: String
 filename = "data/inputDay03_2024.txt"
 
--- Part one test result: 161
--- Part two test result:  48
-testLine :: String
-testLine = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
-
-
 sMultp  = "mul("    :: String
 sDo     = "do()"    :: String
 sDont   = "don't()" :: String
