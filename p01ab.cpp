@@ -75,6 +75,9 @@ int main() {
         vs1.push_back(stoi(lines));
         vs2.push_back(stoi(lines.substr(7,7)));
     }
+    // close file when done
+    file.close();
+    
     vs1 = mergeSort(vs1);
     vs2 = mergeSort(vs2);
     

@@ -233,6 +233,8 @@ int main() {
 
     // Read data and store in two seperate lists
     while (getline(file, lines)) { grid.push_back(lines); }
+    // close file when done
+    file.close();
     
     cout << "Advent of Code 2024 - day 6  (C++)" << endl;       
     cout << "Part one: Number of distinct positions:  " << partOne(grid) << endl;
