@@ -20,6 +20,6 @@ Day 4 and 5 have solutions in Haskell.
 
 Day 6 has solutions in Haskell and C++.
 
-Day 7 has a solution in Haskell.
+Day 7 and 8  have solutions in Haskell.
 
 Happy coding!
