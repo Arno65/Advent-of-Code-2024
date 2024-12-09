@@ -12,16 +12,8 @@ Most of the time that will be Haskell.
 Spoiler alert: All code has the final results of the tasks in the comment section at the beginning of the code.\
 Also note that these final results are obtained with the puzzle input from my Advent-of-Code-2024 account.
 
-Day 1 has solutions in Haskell, Clojure and C++.
-
-Day 2 and 3 have solutions in Haskell and Clojure.
-
-Day 4 and 5 have solutions in Haskell.
-
-Day 6 has solutions in Haskell and C++.
-
-Day 7 has a solution in Haskell.
-
-Day 8 has solutions in Haskell and Clojure.
+Day 1 to 9 have solutions in Haskell.
+Day 1,2,3 and 8 have solutions in CLojure.
+Day 1 and 6 have solutions in C++.
 
 Happy coding!
