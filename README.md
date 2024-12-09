@@ -13,7 +13,7 @@ Spoiler alert: All code has the final results of the tasks in the comment sectio
 Also note that these final results are obtained with the puzzle input from my Advent-of-Code-2024 account.
 
 Day 1 through 9 have solutions in Haskell.\
-Day 1,2,3 and 8 have solutions in CLojure.\
-Day 1 and 6 have solutions in C++.\
+Day 1, 2, 3 and 8 have solutions in CLojure.\
+Day 1 and 6 have solutions in C++.
 
 Happy coding!
