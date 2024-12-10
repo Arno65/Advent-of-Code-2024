@@ -14,6 +14,6 @@ Also note that these final results are obtained with the puzzle input from my Ad
 
 Day 1 through 10 have solutions in Haskell.\
 Day 1, 2, 3 and 8 have solutions in Clojure.\
-Day 1,6 and 9 have solutions in C++.
+Day 1, 6 and 9 have solutions in C++.
 
 Happy coding!
