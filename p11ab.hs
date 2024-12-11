@@ -54,7 +54,7 @@ solve _     0     memory    = (1,memory)
 solve stone blink memory 
     | inMemory              = (value,memory) 
     | stone == 0            = (value0,     updateMemory 1     nBlink value0     memory0) 
-    | evenDigits stone      = (vLeftRight, updateMemory stone  blink vLeftRight mRight)
+    | evenDigits stone      = (vLeftRight, mRight)
     | otherwise             = (value2024,  updateMemory s2024 nBlink value2024  m2024) 
         where
             nBlink                  = blink - 1
