@@ -47,28 +47,28 @@ updateMemory :: Int -> Int -> Int -> Memory -> Memory
 updateMemory stone blink value memory   | inMemory  = memory
                                         | otherwise = memory ++ [((stone,blink),value)]
     where
---        (inMemory,_) = fromMemory (stone,blink) memory
         inMemory = elem (stone,blink) $ map fst memory
 
 solve :: Int -> Int -> Memory -> (Int,Memory)
 solve _     0     memory    = (1,memory) 
 solve stone blink memory 
     | inMemory              = (value,memory) 
-    | stone == 0            = (value0,    updateMemory 1     nBlink value0    memory0) 
-    | evenDigits stone      = (vLR,       updateMemory stone  blink vLR       memoryLR)
-    | otherwise             = (value2024, updateMemory s2024 nBlink value2024 m2024) 
+    | stone == 0            = (value0,     updateMemory 1     nBlink value0     memory0) 
+    | evenDigits stone      = (vLeftRight, updateMemory stone  blink vLeftRight mRight)
+    | otherwise             = (value2024,  updateMemory s2024 nBlink value2024  m2024) 
         where
             nBlink                  = blink - 1
             (inMemory,value)        = fromMemory (stone,blink) memory
             (value0,memory0)        = solve 1 nBlink memory
             (leftStone,rightStone)  = splitEven stone
             (vLeft,mLeft)           = solve leftStone  nBlink memory
-            (vRight,mRight)         = solve rightStone nBlink (updateMemory leftStone nBlink vLeft mLeft)
-            memoryLR                = updateMemory rightStone nBlink vRight mRight
-            vLR                     = vLeft + vRight
+            (vRight,mRight)         = solve rightStone nBlink mLeft
+            vLeftRight              = vLeft + vRight
             s2024                   = stone * 2024
             (value2024,m2024)       = solve s2024 nBlink memory
-            
+
+-- (In this Haskell code) 
+-- Starting with a clear memory for every new stone is 1.5 times faster
 countStones :: Int -> [Int] -> Int 
 countStones blinks = sum . map (fst . (\stone -> solve stone blinks []))
 
@@ -76,10 +76,14 @@ countStones blinks = sum . map (fst . (\stone -> solve stone blinks []))
 main :: IO ()
 main = do   putStrLn "Advent of Code 2024 - day 11 (Haskell)"
             day11 <- numbers <$> readFile filename
-            putStr "Part one: number of stones: "
+            putStr "Part one: number of stones after "
+            putStr $ show counts1
+            putStr " blinks: "
             print $ countStones counts1 day11
-            putStr "Part two: number of stones: "
-            print $ countStones counts2 day11   --- still slow 7m49s
+            putStr "Part two: number of stones after "
+            putStr $ show counts2
+            putStr " blinks: "
+            print $ countStones counts2 day11   --- still slow, 3m46s on my M1
             putStrLn "0K.\n"
 
 
