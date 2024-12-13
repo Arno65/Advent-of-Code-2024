@@ -78,9 +78,9 @@ sumTokens = sum . map (tokens . solveMachine)
 main :: IO ()
 main = do   putStrLn "Advent of Code 2024 - day 13 (Haskell)"
             day13 <- parseMachines <$> lines <$> readFile filename
-            putStr "Part one: The fewest tokens spend to win all possible prizes:           "
+            putStr "Part one: fewest tokens spend to win all possible prizes:           "
             print $ sumTokens day13
-            putStr "Part two: The fewest tokens spend to win all possible prizes: "
+            putStr "Part two: fewest tokens spend to win all possible prizes: "
             print $ sumTokens $ increasePrizes day13
             putStrLn "0K.\n"
 

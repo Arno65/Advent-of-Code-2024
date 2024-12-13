@@ -122,9 +122,9 @@ main = do   putStrLn "Advent of Code 2024 - day 5  (Haskell)"
             day5 <- lines <$> readFile filename
             let pors = pageOrderinfRules day5
             let p2ps = pagesToProduce day5
-            putStr "Part one: Sum of middle page numbers from correctly-ordered updates: "
+            putStr "Part one: sum of middle page numbers (correctly-ordered updates): "
             print $ partOne pors p2ps
-            putStr "Part two: Sum of middle page numbers from corrected-ordered updates: "
+            putStr "Part two: sum of middle page numbers (corrected-ordered updates): "
             print $ partTwo pors p2ps 
 
             putStrLn "0K.\n"
