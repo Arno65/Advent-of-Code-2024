@@ -11,16 +11,15 @@
 
 -- module AoC2024d12ab where
 
-import Data.List    (nub)
+import Data.List (nub)
 
+type Plant          = Char
 type Farm           = [String] 
 type Location       = (Int,Int)
 type Direction      = (Int,Int)
 type Locations      = [Location]
 type Directions     = [Direction]
-type Plant          = Char
-type PlantGroup     = (Plant,Locations) -- Plant data is not needed for calculations
-type PlantGroups    = [PlantGroup]
+type PlantGroups    = [Locations]
 
 -- Some initials
 filename :: String
@@ -33,13 +32,13 @@ north  = ( 0,-1) :: Direction
 
 -- Corner test - both NOT plant  -  or
 -- Corner test - two sides are plant, diagonal is NOT
-windDirections :: [Directions]
-windDirections = [northWest,northEast,southEast,southWest]
-northWest   = [north,west]
-northEast   = [north,east]
-southWest   = [south,west]
-southEast   = [south,east]
-
+cornerDirections :: [Directions]
+cornerDirections = [northWest,northEast,southEast,southWest]
+    where
+        northWest   = [north,west]
+        northEast   = [north,east]
+        southWest   = [south,west]
+        southEast   = [south,east]
 
 addPair :: Direction -> Direction -> Direction
 addPair (x1,y1) (x2,y2) = (x1+x2,y1+y2)
@@ -61,7 +60,8 @@ isPlant :: Farm -> Location -> Plant -> Bool
 isPlant farm (px,py) plant = farm!!py!!px == plant
 
 ----------------------------------------------------------------------------------------------
-
+-- Parsing and Flood fill the farm area with the different plants
+--
 groupPlants :: Farm -> PlantGroups
 groupPlants farm = groupPlants' farm (0,0) (farmSize farm) []
         
@@ -74,7 +74,7 @@ groupPlants' farm (px,py) (mx,my) markedLocations
         where 
             plant           = getPlant farm (px,py)
             plantsList      = groupSinglePlants farm [(px,py)] (mx,my) plant [(px,py)]
-            newPlantsGroup  = [(plant,plantsList)]
+            newPlantsGroup  = [plantsList]
             newMarked       = markedLocations ++ plantsList      
 
 groupSinglePlants :: Farm -> Locations -> Location -> Plant -> Locations -> Locations
@@ -97,18 +97,20 @@ borderingPlants farm pxy mxy plant planted =
 
 ----------------------------------------------------------------------------------------------
 -- Fencing part one
+--
 fencePlacementOne :: Locations -> Int
 fencePlacementOne plants = sum [ fenceCount plant plants | plant <- plants ]
     where
         fenceCount pxy plants = sum [ 1 | bl <- borderLocations, not (elem bl plants) ]
-            where
+            where 
                 borderLocations = [ addPair pxy east, addPair pxy south, 
                                     addPair pxy west, addPair pxy north ]
 
 ----------------------------------------------------------------------------------------------
 -- Fencing part two
+--
 fencePlacementTwo :: Locations -> Int
-fencePlacementTwo pxys = sum [ countCorners windDirections pxy pxys | pxy <- pxys ]
+fencePlacementTwo pxys = sum [ countCorners cornerDirections pxy pxys | pxy <- pxys ]
 
 countCorners :: [Directions] -> Location -> Locations -> Int
 countCorners []       _   _     = 0
@@ -120,20 +122,18 @@ countCorners (wd:wds) pxy pxys  = cco + cci + countCorners wds pxy pxys
         ib1 = elem (addPair pxy dxy1) pxys
         ib2 = elem (addPair pxy dxy2) pxys
         ib3 = not (elem (addPair pxy (addPair dxy1 dxy2)) pxys)
-        cci = if (and [ib1,ib2,ib3]) then 1 else 0
+        cci = if and [ib1,ib2,ib3] then 1 else 0
         -- 'outside' corner
-        ob1 = not ib1
-        ob2 = not ib2
-        cco = if (ob1 && ob2) then 1 else 0
+        cco = if not (ib1 || ib2) then 1 else 0
 
 
-costCalculation :: Int -> [String] -> Int
-costCalculation pricing farm = sum [ g*f | (g,f) <- zip gc fc ]
+costCalculation :: Int -> Farm -> Int
+costCalculation pricing farm = sum [ g*f | (g,f) <- zip gpc fpc ]
     where
-        gl = map snd (groupPlants farm)
-        gc = map length gl
-        fc = if (pricing==1)    then map fencePlacementOne gl
-                                else map fencePlacementTwo gl
+        gps = groupPlants farm
+        gpc = map length gps
+        fpc = if (pricing==1)   then map fencePlacementOne gps
+                                else map fencePlacementTwo gps
 
 
 main :: IO ()
