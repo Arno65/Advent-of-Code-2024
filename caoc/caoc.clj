@@ -2,13 +2,83 @@
 ;;;;    https://adventofcode.com/
 ;;;;
 ;;;;    Current available functions:
+;;;;
+;;;;       (is-digit char)               check is a character is a digit [0..9]
+;;;;       (get-digits string)           get a list of digits
+;;;;       (to-Natural list)             convert digits to a Natural (so positive)
+;;;;       (strip-digits string)         strip all digits at the start of a string
+;;;;       (get-integer string)          get the first integer (+/-) from a string
+;;;;       (get-all-integers string)     get all integers from a string (into a list)
+;;;;
 ;;;;       (halve list)                  split 'list' into two halves
 ;;;;       (merge-lists list1 list2)     merge two lists ordered
 ;;;;       (merge-sort list)             divide & conquer sort algorithm
 ;;;;    
 ;;;;
-;;;;    (cl) by Arno Jacobs, 2024-12-04
+;;;;    (cl) by Arno Jacobs, 2024-12-15
 ;;;;    
+;;;;    version 1.0     2024-12-04       first draft with merge-sort
+;;;;    version 2.0     2024-12-15       added string to int conversions
+;;;;                                     added namespace 'caoc/'
+;;;;
+;;;;
+;;;;
+
+;;; ------------------------------------------------------------------------------
+;;; Integers from a string line
+
+(ns caoc)
+
+(defn is-digit [c] (and (>= 0 (compare \0 c))
+                        (>= 0 (compare c \9))))
+
+(defn get-digits
+  [line]
+  (if (empty? line)
+    nil
+    (let [c (first line)]
+        (if (is-digit c) 
+        (cons c (get-digits (rest line)))
+        nil))))
+
+(defn to-Natural
+  [digits]
+  (if (empty? digits)
+    0
+    (+ (* 10 (to-Natural (drop-last 1 digits)))
+       (- (int (last digits)) 48))))   ;; character-digit to integer
+    
+(defn strip-digits 
+  [line]
+  (if (empty? line)
+    nil
+    (if (is-digit (first line))
+      (strip-digits (rest line))
+      (apply str line))))
+      
+(defn get-integer
+  [line]
+  (if (empty? line)
+    nil
+    (let [c  (first line)
+          rl (rest line)]
+      (if (= c \-)
+        (if (empty? rl)
+          nil
+          (cons (- (to-Natural (get-digits rl))) (strip-digits rl)))
+        (if (is-digit c)
+          (cons (to-Natural (get-digits line)) (strip-digits rl))
+          (get-integer rl))))))
+          
+(defn get-all-integers
+  [line]
+  (if (empty? line)
+    nil
+    (let [pair (get-integer line)
+          i (first pair)
+          rl (apply str (rest pair))]
+      (cons i (get-all-integers rl)))))
+
 
 
 ;;; ------------------------------------------------------------------------------
