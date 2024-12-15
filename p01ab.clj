@@ -40,8 +40,8 @@
        last))
 
 (def data-set (get-lines "./data/inputDay01_2024.txt"))
-(def list1 (merge-sort (mapv first-number data-set)))
-(def list2 (merge-sort (mapv last-number data-set)))
+(def list1 (caoc/merge-sort (mapv first-number data-set)))
+(def list2 (caoc/merge-sort (mapv last-number data-set)))
 
 
 ;;;  Part one
