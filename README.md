@@ -9,7 +9,7 @@ That's why here and there is a C++ program.
 For collecting the stars I will first code the solution in the language that works best for me. 
 Most of the time that will be Haskell.
 
-Spoiler alert: All code has the final results of the tasks in the comment section at the beginning of the code.\
+Spoiler alert: All code has the final results of the tasks in the comment section at the beginning of the code.
 Also note that these final results are obtained with the puzzle input from my Advent-of-Code-2024 account.
 
 Day 1 through 14 and 18 have solutions in Haskell.\
