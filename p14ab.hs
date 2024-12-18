@@ -11,6 +11,7 @@
 module AoC2024d14ab where
 
 import Data.Char (isDigit)
+import Data.List (sort)
 
 type Location   = (Int,Int)             -- tile location, with (0,0) is top left
 type Locations  = [Location]
@@ -93,6 +94,28 @@ allUnique es = [ e | e <- es, length (filter (==e) es) == 1 ] == es
 partTwo :: Robots -> Int
 partTwo robots = head [ s | s <- [1..], isImage (map (walkies s) robots) ]   
 
+-- base on minimal entropy
+-- 
+partEntropy :: Robots -> Int
+partEntropy robots = 
+    snd $ minimum [ (entropy newState,s) | 
+                    s <- [1..(fst bathroom * snd bathroom)], 
+                    let newState = map (walkies s) robots ]   
+
+entropy :: Robots -> Int
+entropy = partialEntropy . map fst
+
+partialEntropy :: Locations -> Int
+partialEntropy (l:ls)
+    | ls == []  =   0
+    | otherwise =   sum [ distance l l' | l' <- ls ]
+                +   partialEntropy ls
+
+distance :: Location -> Location -> Int
+distance (x,y) (lx,ly) = dx*dx + dy*dy
+    where
+        dx = x-lx
+        dy = y-ly
 
 -- Helper code for 'plotting' center part of bathroom --------------------------
 -- 
@@ -118,10 +141,17 @@ main = do   putStrLn "Advent of Code 2024 - day 14 (Haskell)"
             day14 <- map parse <$> lines <$> readFile filename
             putStr "Part one: safety factor after 100 seconds is:        "
             print $ partOne day14
+            putStrLn "-----\nBased on all unique positions for all robots."
             putStr "Part two: number of seconds for first easter egg is:      "
             print $ partTwo day14
+
+            putStrLn "Based on minimal entropy of the image."
+            putStr "Part two: number of seconds for first easter egg is:      "
+            print $ partEntropy day14
+
             -- Optional plot of the easter egg
             -- plotEasterEgg day14
             putStrLn "0K.\n"
 
 --  End of code
+
