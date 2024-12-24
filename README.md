@@ -17,7 +17,7 @@ Day 1, 2, 3, 8 and 14 have solutions in Clojure.\
 Day 1, 6, 9 and 11 have solutions in C++.
 
 Part one and two of day 21 are work in progress.\
-Part two of day 16,17,19,21 and 23 are work in progress.\
+Part two of day 16, 17, 19, 21 and 23 are work in progress.\
 My current code for these parts is slow and ugly.
 
 Happy coding!
