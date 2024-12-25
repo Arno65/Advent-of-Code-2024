@@ -12,12 +12,12 @@ Most of the time that will be Haskell.
 Spoiler alert: All code has the final results of the tasks in the comment section at the beginning of the code.
 Also note that these final results are obtained with the puzzle input from my Advent-of-Code-2024 account.
 
-Day 1 through 15, day 18, 20 and 22 have solutions in Haskell.\
+Day 1 through 15, day 18, 20, 22 and 25 have solutions in Haskell.\
 Day 1, 2, 3, 8 and 14 have solutions in Clojure.\
 Day 1, 6, 9 and 11 have solutions in C++.
 
 Part one and two of day 21 are work in progress.\
-Part two of day 16, 17, 19, 21 and 23 are work in progress.\
+Part two of day 16, 17, 19, 21, 23 and 24 are work in progress.\
 My current code for these parts is slow and ugly.
 
 Happy coding!
